@@ -1,3 +1,2 @@
-# Dokumentation NovaCord 0.1.6
-
-Willkommen zur offiziellen Dokumentation.
+# NovaCord
+Ein leichtgewichtiges Discord.js Framework.

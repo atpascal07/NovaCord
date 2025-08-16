@@ -1,16 +1,9 @@
 {
   "name": "novacord",
-  "version": "0.1.6",
-  "description": "Ein Framework für Discord.js Bots",
+  "version": "0.1.7",
+  "description": "Ein leichtgewichtiges Discord.js Framework.",
+  "main": "index.js",
   "type": "module",
-  "main": "novacord/index.js",
-  "exports": {
-    ".": "./novacord/index.js"
-  },
-  "scripts": {
-    "start": "node index.js"
-  },
-  "dependencies": {
-    "discord.js": "^14.16.3"
-  }
+  "scripts": { "start": "node index.js" },
+  "dependencies": { "discord.js": "^14.15.3", "dotenv": "^16.3.1" }
 }
