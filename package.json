@@ -1,27 +1,13 @@
 {
   "name": "novacord",
-  "version": "0.1.4",
-  "description": "Discord.js Framework inspiriert von EzCord (Python), jetzt als ESM.",
+  "version": "0.1.5",
+  "description": "Ein Framework für Discord.js Bots",
+  "main": "index.js",
   "type": "module",
-  "main": "novacord/index.js",
-  "license": "MIT",
-  "keywords": [
-    "discord",
-    "bot",
-    "framework",
-    "discord.js"
-  ],
-  "author": "NovaCord Team",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/atpascal07/NovaCord.git"
+  "scripts": {
+    "start": "node index.js"
   },
-  "bugs": {
-    "url": "https://github.com/atpascal07/NovaCord/issues"
-  },
-  "homepage": "https://github.com/atpascal07/NovaCord#readme",
   "dependencies": {
-    "discord.js": "^14.15.3",
-    "dotenv": "^16.4.5"
+    "discord.js": "^14.16.3"
   }
 }
