@@ -1,6 +1,0 @@
-- [Startseite](/)
-- [Erste Schritte](getting-started.md)
-- [Commands](commands.md)
-- [Events](events.md)
-- [Client](client.md)
-- [FAQ](faq.md)
