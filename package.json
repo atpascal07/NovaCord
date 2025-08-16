@@ -1,13 +1,15 @@
 {
   "name": "novacord",
   "version": "0.1.8",
-  "description": "Ein einfach zu nutzendes Framework für discord.js",
-  "main": "index.js",
+  "description": "Ein einfach zu nutzendes Framework für discord.js (ESM)",
+  "main": "./novacord/index.js",
   "type": "module",
-  "scripts": {
-    "docs:dev": "mkdocs serve",
-    "docs:build": "mkdocs build",
-    "docs:deploy": "mkdocs gh-deploy"
+  "exports": {
+    ".": "./novacord/index.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.5"
   },
   "repository": {
     "type": "git",
@@ -25,11 +27,5 @@
   "bugs": {
     "url": "https://github.com/atpascal07/NovaCord/issues"
   },
-  "homepage": "https://atpascal07.github.io/NovaCord/",
-  "dependencies": {
-    "discord.js": "^14.15.3"
-  },
-  "devDependencies": {
-    "mkdocs-material": "^9.5.18"
-  }
+  "homepage": "https://atpascal07.github.io/NovaCord/"
 }
