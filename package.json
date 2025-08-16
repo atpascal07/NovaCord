@@ -1,6 +1,6 @@
 {
   "name": "novacord",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "Ein einfach zu nutzendes Framework für discord.js.",
   "type": "module",
   "main": "./novacord/index.js",
@@ -24,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/atpascal07/NovaCord/issues"
   },
-  "homepage": "https://github.com/atpascal07/NovaCord#readme",
+  "homepage": "https://discord.gg/YWZwk3fn",
   "dependencies": {
     "discord.js": "^14.16.3",
     "dotenv": "^16.4.5",
