@@ -1,9 +1,9 @@
-import { Client, GatewayIntentBits, Collection, REST, Routes, EmbedBuilder } from "discord.js";
+import { Client, GatewayIntentBits, Collection, REST, Routes } from "discord.js";
 import fs from "fs";
 import path from "path";
 import { pathToFileURL } from "url";
 import dotenv from "dotenv";
-import { banner } from "./utils/banner.js";
+import { printStartBanner } from "./utils/banner.js";
 
 dotenv.config();
 
@@ -18,50 +18,20 @@ function isCommandModule(mod) {
 
 export class NovaClient extends Client {
   constructor(options = {}) {
-    const { intents, startMessage, ...rest } = options;
+    const { intents, ...rest } = options;
     super({
       intents: intents ?? [GatewayIntentBits.Guilds],
       ...rest
     });
 
     this.commands = new Collection();
-    this._startMessage = {
-      banner: startMessage?.banner ?? true,
-      send: startMessage?.send ?? false
-    };
 
     this.once("ready", async () => {
       try {
-        if (this._startMessage.banner) {
-          const pkgVersion = "0.1.8";
-          // Guilds kann bei Sharding anders sein; hier einfache Zählung
-          const guildCount = this.guilds?.cache?.size ?? 0;
-          console.log(
-            banner({
-              username: this.user?.tag ?? "Unbekannt",
-              id: this.user?.id ?? "-",
-              guilds: guildCount,
-              version: pkgVersion
-            })
-          );
-        }
-
-        if (this._startMessage.send && process.env.START_CHANNEL_ID) {
-          const ch = await this.channels.fetch(process.env.START_CHANNEL_ID).catch(() => null);
-          if (ch && ch.isTextBased()) {
-            const emb = new EmbedBuilder()
-              .setTitle("NovaCord gestartet")
-              .setDescription("Der Bot ist erfolgreich online.")
-              .addFields(
-                { name: "Bot", value: `${this.user.tag} (${this.user.id})`, inline: true },
-                { name: "Guilds", value: String(this.guilds.cache.size), inline: true }
-              )
-              .setTimestamp();
-            await ch.send({ embeds: [emb] }).catch(() => {});
-          }
-        }
+        const version = "0.1.11";
+        printStartBanner(this, { version, commandCount: this.commands.size });
       } catch (e) {
-        console.error("[NovaCord] Fehler beim Start-Banner:", e);
+        console.error("[NovaCord] Fehler bei der Startmeldung:", e);
       }
     });
 

@@ -1,7 +1,7 @@
 {
   "name": "novacord",
-  "version": "0.1.10",
-  "description": "Ein einfach zu nutzendes Framework für discord.js (ESM) – mit Start-Banner wie bei EzCord.",
+  "version": "0.1.11",
+  "description": "Ein einfach zu nutzendes Framework für discord.js (ESM) mit Startmeldung in der Konsole.",
   "type": "module",
   "main": "./novacord/index.js",
   "exports": {
@@ -27,6 +27,8 @@
   "homepage": "https://github.com/atpascal07/NovaCord#readme",
   "dependencies": {
     "discord.js": "^14.16.3",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "chalk": "^5.3.0",
+    "cli-table3": "^0.6.3"
   }
 }

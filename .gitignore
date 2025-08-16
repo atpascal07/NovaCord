@@ -1,16 +1,21 @@
-example_bot/
-__pycache__/
-.idea/
-venv
+# Dependencies
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Environment
 .env
-*.db
-*.log
+.env.*
 
-# Packaging
-build/
+# Builds
 dist/
-*.egg-info/
-*.egg
+build/
+coverage/
 
-# Sphinx
-docs/_build
+# OS / Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
