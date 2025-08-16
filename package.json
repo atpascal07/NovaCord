@@ -1,6 +1,6 @@
 {
   "name": "novacord",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Ein einfach zu nutzendes Framework für discord.js (ESM)",
   "main": "./novacord/index.js",
   "type": "module",
