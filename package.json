@@ -1,7 +1,7 @@
 {
   "name": "novacord",
   "version": "0.1.11",
-  "description": "Ein einfach zu nutzendes Framework für discord.js (ESM) mit Startmeldung in der Konsole.",
+  "description": "Ein einfach zu nutzendes Framework für discord.js.",
   "type": "module",
   "main": "./novacord/index.js",
   "exports": {
