@@ -4,8 +4,7 @@ NovaCord ist ein leichtgewichtiges Discord.js Framework (ESM), inspiriert von Ez
 
 ## Installation
 ```bash
-npm install novacord@0.1.4-beta
-```
+npm install novacord@0.1.4```
 
 ## Nutzung
 ```js
