@@ -1,7 +1,7 @@
 {
   "name": "novacord",
-  "version": "0.1.3-beta",
-  "description": "Discord.js Framework inspiriert von EzCord (Python).",
+  "version": "0.1.4-beta",
+  "description": "Discord.js Framework inspiriert von EzCord (Python), jetzt als ESM.",
   "type": "module",
   "main": "novacord/index.js",
   "license": "MIT",

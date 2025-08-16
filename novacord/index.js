@@ -18,20 +18,20 @@ export class NovaClient extends Client {
     });
 
     this.commands = new Collection();
-    this.loadCommands();
     this.blacklist = new Set();
+    this.loadCommands();
   }
 
   loadCommands() {
     const commandsPath = path.join(__dirname, "commands");
+    if (!fs.existsSync(commandsPath)) return;
     const files = fs.readdirSync(commandsPath).filter(f => f.endsWith(".js"));
-
     for (const file of files) {
       import(path.join(commandsPath, file)).then((cmd) => {
         if (cmd && cmd.default?.name) {
           this.commands.set(cmd.default.name, cmd.default);
         }
-      });
+      }).catch(console.error);
     }
   }
 
