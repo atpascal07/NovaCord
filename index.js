@@ -1,5 +1,0 @@
-import { NovaClient } from './novacord/client.js';
-
-const client = new NovaClient();
-client.once('ready', () => console.log(`Eingeloggt als ${client.user.tag}`));
-client.start();
