@@ -1,8 +1,12 @@
-const { Client, GatewayIntentBits, Collection } = require('discord.js');
-const fs = require('fs');
-const path = require('path');
+import { Client, GatewayIntentBits, Collection } from "discord.js";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
-class NovaClient extends Client {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export class NovaClient extends Client {
   constructor(options = {}) {
     super({
       intents: [
@@ -19,14 +23,15 @@ class NovaClient extends Client {
   }
 
   loadCommands() {
-    const commandsPath = path.join(__dirname, 'commands');
-    const files = fs.readdirSync(commandsPath).filter(f => f.endsWith('.js'));
+    const commandsPath = path.join(__dirname, "commands");
+    const files = fs.readdirSync(commandsPath).filter(f => f.endsWith(".js"));
 
     for (const file of files) {
-      const cmd = require(path.join(commandsPath, file));
-      if (cmd && cmd.name) {
-        this.commands.set(cmd.name, cmd);
-      }
+      import(path.join(commandsPath, file)).then((cmd) => {
+        if (cmd && cmd.default?.name) {
+          this.commands.set(cmd.default.name, cmd.default);
+        }
+      });
     }
   }
 
@@ -38,22 +43,20 @@ class NovaClient extends Client {
     if (message.author.bot) return;
     if (this.blacklist.has(message.author.id)) return;
 
-    const prefix = '!';
+    const prefix = "!";
     if (!message.content.startsWith(prefix)) return;
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
-    const cmdName = args.shift().toLowerCase();
+    const commandName = args.shift().toLowerCase();
 
-    const cmd = this.commands.get(cmdName);
-    if (!cmd) return;
+    const command = this.commands.get(commandName);
+    if (!command) return;
 
     try {
-      await cmd.execute(message, args, this);
+      await command.execute(message, args, this);
     } catch (err) {
       console.error(err);
-      message.reply('❌ Fehler beim Ausführen des Commands.');
+      await message.reply("❌ Fehler beim Ausführen des Commands.");
     }
   }
 }
-
-module.exports = { NovaClient };

@@ -1,7 +1,8 @@
 {
   "name": "novacord",
-  "version": "0.1.2-beta",
-  "description": "Discord.js Framework.",
+  "version": "0.1.3-beta",
+  "description": "Discord.js Framework inspiriert von EzCord (Python).",
+  "type": "module",
   "main": "novacord/index.js",
   "license": "MIT",
   "keywords": [
@@ -13,8 +14,12 @@
   "author": "NovaCord Team",
   "repository": {
     "type": "git",
-    "url": "https://github.com/atpascal07/NovaCord"
+    "url": "https://github.com/atpascal07/NovaCord.git"
   },
+  "bugs": {
+    "url": "https://github.com/atpascal07/NovaCord/issues"
+  },
+  "homepage": "https://github.com/atpascal07/NovaCord#readme",
   "dependencies": {
     "discord.js": "^14.15.3",
     "dotenv": "^16.4.5"

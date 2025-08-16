@@ -1,16 +1,15 @@
 # NovaCord
 
-NovaCord ist ein Discord.js Framework, inspiriert von EzCord (Python).
-Es bietet eine einfache Möglichkeit, Commands und Events für Discord-Bots zu organisieren.
+NovaCord ist ein leichtgewichtiges Discord.js Framework, inspiriert von EzCord (Python).
 
 ## Installation
 ```bash
-npm install novacord
+npm install novacord@0.1.3-beta
 ```
 
-## Verwendung
+## Nutzung
 ```js
-const { NovaClient } = require("novacord");
+import { NovaClient } from "novacord";
 
 const client = new NovaClient();
 
@@ -22,11 +21,3 @@ client.on("messageCreate", (msg) => client.handleMessage(msg));
 
 client.login("DEIN_TOKEN");
 ```
-
-## Features
-- Command-Handler (Ordner `commands/`)
-- Blacklist-System
-- Beispielcommands: `help`, `blacklist`, `statusChanger`
-
-## Lizenz
-MIT
