@@ -6,7 +6,7 @@ body:
 - type: markdown
   attributes:
     value: |
-      - Check if the feature was already requested [here](https://github.com/tibue99/ezcord/issues).
+      - Check if the feature was already requested [here](https://github.com/atpascal07/NovaCord/issues).
       - Include only one feature per issue.
 
 - type: textarea
