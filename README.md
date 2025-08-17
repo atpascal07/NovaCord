@@ -9,7 +9,7 @@ NovaCord bietet **automatisches Laden & Deployen von Slash Commands**, eine **pr
 
 ## 📊 Status
 
-[![npm version](https://img.shields.io/npm/v/novacord?color=blue&style=flat-square)](https://www.npmjs.com/package/novacordjs)
+[![npm version](https://img.shields.io/npm/v/novacordjs?color=blue&style=flat-square)](https://www.npmjs.com/package/novacordjs)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](./LICENSE)
 [![discord.js](https://img.shields.io/badge/discord.js-v14-blue.svg?style=flat-square)](https://discord.js.org)
 
