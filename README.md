@@ -9,7 +9,7 @@ NovaCord bietet **automatisches Laden & Deployen von Slash Commands**, eine **pr
 
 ## 📊 Status
 
-[![npm version](https://img.shields.io/npm/v/novacord?color=blue&style=flat-square)](https://www.npmjs.com/package/novacord)
+[![npm version](https://img.shields.io/npm/v/novacord?color=blue&style=flat-square)](https://www.npmjs.com/package/novacordjs)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](./LICENSE)
 [![discord.js](https://img.shields.io/badge/discord.js-v14-blue.svg?style=flat-square)](https://discord.js.org)
 
@@ -17,7 +17,7 @@ NovaCord bietet **automatisches Laden & Deployen von Slash Commands**, eine **pr
 
 ## ✨ Features
 
-- 🚀 **ESM-first**: `import { NovaClient } from "novacord";`
+- 🚀 **ESM-first**: `import { NovaClient } from "novacordjs";`
 - 📂 **Command-Loader**: Lädt automatisch alle Commands aus einem Ordner (z. B. `./commands`).
 - ⚡ **Slash-Command Deploy**: Registriere deine Commands global oder nur für einzelne Guilds.
 - 🖥 **Startmeldung in der Konsole**: Übersichtliche Infos zum Bot (Name, ID, Version, Guilds, Latenz, Commands).
@@ -29,13 +29,13 @@ NovaCord bietet **automatisches Laden & Deployen von Slash Commands**, eine **pr
 ## 📦 Installation
 
 ```bash
-npm install novacord
+npm install novacordjs
 ```
 
 Oder lokal für die Entwicklung:
 
 ```bash
-npm install ./pfad/zu/deinem/novacord
+npm install ./pfad/zu/deinem/novacordjs
 ```
 
 ---
@@ -53,7 +53,7 @@ CLIENT_ID=123456789012345678
 ### 2️⃣ index.js
 ```js
 import { config } from "dotenv";
-import { NovaClient } from "novacord";
+import { NovaClient } from "novacordjs";
 
 config();
 
