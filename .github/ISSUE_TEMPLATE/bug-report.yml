@@ -1,0 +1,63 @@
+name: Bug Report
+description: Report a bug that you found
+labels: [bug]
+
+body:
+- type: markdown
+  attributes:
+    value: |
+      - Check if the bug was already reported [here](https://github.com/tibue99/ezcord/issues).
+      - Include only one bug per issue.
+      - Make sure that only one Discord package is installed.
+
+- type: input
+  attributes:
+    label: EzCord Version
+    description: Which version of EzCord are you using?
+    placeholder: X.Y.Z
+  validations:
+    required: true
+
+- type: input
+  attributes:
+    label: Version
+    description: Which version of Discord.py or Pycord are you using?
+    placeholder: Pycord X.Y.Z
+  validations:
+    required: true
+
+- type: textarea
+  attributes:
+    label: Bug Description
+    description: Please provide a brief summary of the bug.
+  validations:
+    required: true
+
+- type: textarea
+  attributes:
+    label: Reproduction Steps
+    description: Write down the steps to reproduce the bug.
+  validations:
+    required: true
+
+- type: textarea
+  attributes:
+    label: Minimal Reproducible Code
+    description: >
+      A short snippet of code that showcases the bug.
+      Please remove your bot token and everything that is not related to the bug.
+    render: Python
+
+- type: textarea
+  attributes:
+    label: Expected Results
+    description: What did you expect to happen?
+  validations:
+    required: true
+
+- type: textarea
+  attributes:
+    label: Actual Results
+    description: What actually happened? If necessary, paste the error traceback here.
+  validations:
+    required: true
