@@ -1,9 +1,17 @@
-import { Client, GatewayIntentBits, Collection, REST, Routes, SlashCommandBuilder } from "discord.js";
+// src/client.js
+import {
+  Client,
+  GatewayIntentBits,
+  Collection,
+  REST,
+  Routes
+} from "discord.js";
 import fs from "fs";
 import path from "path";
 import { pathToFileURL } from "url";
 import dotenv from "dotenv";
-import { printReady } from "./utils/banner.js"; // ✅ Richtig: utils/banner.js
+import { printReady } from "./utils/banner.js"; // ✅ utils/banner.js
+import { HelpCommand } from "./framework/commands/help.js";
 
 dotenv.config();
 
@@ -27,11 +35,18 @@ export class NovaClient extends Client {
     this.commands = new Collection();
     this.startMessageStyle = startMessageStyle;
 
+    // Help-Command ist optional
+    this.helpEnabled = false;
+
     // 📌 Ready-Event
     this.once("ready", async () => {
       try {
         const version = "0.0.1";
-        printReady(this, { version, commandCount: this.commands.size, style: this.startMessageStyle });
+        printReady(this, {
+          version,
+          commandCount: this.commands.size,
+          style: this.startMessageStyle
+        });
       } catch (e) {
         console.error("[NovaCord] Fehler bei der Startmeldung:", e);
       }
@@ -50,7 +65,10 @@ export class NovaClient extends Client {
           if (interaction.deferred || interaction.replied) {
             await interaction.editReply({ content: "Es ist ein Fehler aufgetreten." });
           } else {
-            await interaction.reply({ content: "Es ist ein Fehler aufgetreten.", ephemeral: true });
+            await interaction.reply({
+              content: "Es ist ein Fehler aufgetreten.",
+              ephemeral: true
+            });
           }
         } catch {}
       }
@@ -60,7 +78,9 @@ export class NovaClient extends Client {
   // 📌 Bot starten
   async start(token = process.env.TOKEN) {
     if (!token || typeof token !== "string") {
-      throw new Error("Kein Bot-Token gefunden! Lege TOKEN in .env an oder übergib es an start(token)");
+      throw new Error(
+        "Kein Bot-Token gefunden! Lege TOKEN in .env an oder übergib es an start(token)"
+      );
     }
     return this.login(token);
   }
@@ -88,13 +108,16 @@ export class NovaClient extends Client {
   }
 
   // 📌 Commands deployen
-  async deployCommands({ clientId = process.env.CLIENT_ID, guildId = process.env.GUILD_ID } = {}) {
+  async deployCommands({
+    clientId = process.env.CLIENT_ID,
+    guildId = process.env.GUILD_ID
+  } = {}) {
     if (!clientId) throw new Error("CLIENT_ID wird benötigt, um Commands zu deployen.");
     const list = toArray(this.commands?.values?.() ?? []);
     const body = list
-      .map(c => c?.data)
+      .map((c) => c?.data)
       .filter(Boolean)
-      .map(d => (typeof d.toJSON === "function" ? d.toJSON() : d));
+      .map((d) => (typeof d.toJSON === "function" ? d.toJSON() : d));
 
     const token = process.env.TOKEN;
     if (!token) throw new Error("TOKEN wird für den REST-Deploy benötigt.");
@@ -110,37 +133,12 @@ export class NovaClient extends Client {
     }
   }
 
-  // 📌 Help-Command
-  addHelpCommand(name = "help", { embed = true } = {}) {
-    const helpCommand = {
-      data: new SlashCommandBuilder()
-        .setName(name)
-        .setDescription("Zeigt eine Liste aller verfügbaren Commands an"),
-      execute: async (interaction) => {
-        const list = this.commands.map(cmd => {
-          const desc = cmd.data.description || "Keine Beschreibung";
-          return `\`/${cmd.data.name}\` - ${desc}`;
-        }).join("\n");
-
-        if (embed) {
-          await interaction.reply({
-            embeds: [{
-              title: "📖 Hilfe",
-              description: list.length ? list : "Keine Commands gefunden.",
-              color: 0x5865F2
-            }],
-            ephemeral: true
-          });
-        } else {
-          await interaction.reply({
-            content: list.length ? list : "Keine Commands gefunden.",
-            ephemeral: true
-          });
-        }
-      }
-    };
-
-    this.commands.set(helpCommand.data.name, helpCommand);
-    return helpCommand;
+  // 📌 Help-Command aktivieren (optional!)
+  useHelpCommand(options = {}) {
+    if (this.helpEnabled) return;
+    const help = new HelpCommand(this, options);
+    this.commands.set(help.data.name, help);
+    this.helpEnabled = true;
+    return help;
   }
 }
