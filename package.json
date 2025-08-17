@@ -1,6 +1,6 @@
 {
   "name": "novacord",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "description": "Ein einfach zu nutzendes Framework für discord.js.",
   "type": "module",
   "main": "./novacord/index.js",
