@@ -1,4 +1,4 @@
-name: Auto Publish to npm and GitHub Releases
+name: Auto Publish to npm
 
 on:
   push:
@@ -13,8 +13,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # wichtig für Commit-History
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -28,17 +26,17 @@ jobs:
       - name: Build (optional)
         run: npm run build --if-present
 
-      - name: Get package version
-        id: pkg
-        run: |
-          VERSION=$(node -p "require('./package.json').version")
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
+      - name: Get version from package.json
+        run: echo "VERSION=$(node -p \"require('./package.json').version\")" >> $GITHUB_ENV
 
       - name: Get commit messages
         id: changelog
         run: |
-          LOG=$(git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"- %s (%h)")
-          echo "CHANGELOG=$LOG" >> $GITHUB_ENV
+          {
+            echo "CHANGELOG<<EOF"
+            git log $(git describe --tags --abbrev=0 --tags --always)..HEAD --pretty=format:"- %s (%h)"
+            echo "EOF"
+          } >> $GITHUB_ENV
 
       - name: Publish to npm
         run: npm publish --access public
@@ -50,9 +48,6 @@ jobs:
         with:
           tag_name: v${{ env.VERSION }}
           name: Release v${{ env.VERSION }}
-          body: |
-            ## Änderungen in v${{ env.VERSION }}
-
-            ${{ env.CHANGELOG }}
+          body: ${{ env.CHANGELOG }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
