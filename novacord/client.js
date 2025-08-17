@@ -104,17 +104,32 @@ export class NovaClient extends Client {
     }
   }
 
-  addHelpCommand(name = "help") {
+  addHelpCommand(name = "help", { embed = true } = {}) {
     const helpCommand = {
       data: new SlashCommandBuilder()
         .setName(name)
         .setDescription("Zeigt eine Liste aller verfügbaren Commands an"),
       execute: async (interaction) => {
-        const list = this.commands.map(cmd => `\`/${cmd.data.name}\` - ${cmd.data.description}`).join("\n");
-        await interaction.reply({
-          content: list.length ? list : "Keine Commands gefunden.",
-          ephemeral: true
-        });
+        const list = this.commands.map(cmd => {
+          const desc = cmd.data.description || "Keine Beschreibung";
+          return `\`/${cmd.data.name}\` - ${desc}`;
+        }).join("\n");
+
+        if (embed) {
+          await interaction.reply({
+            embeds: [{
+              title: "📖 Hilfe",
+              description: list.length ? list : "Keine Commands gefunden.",
+              color: 0x5865F2
+            }],
+            ephemeral: true
+          });
+        } else {
+          await interaction.reply({
+            content: list.length ? list : "Keine Commands gefunden.",
+            ephemeral: true
+          });
+        }
       }
     };
 
