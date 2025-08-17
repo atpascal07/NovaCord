@@ -1,9 +1,16 @@
-import { Client, GatewayIntentBits, Collection, REST, Routes, SlashCommandBuilder } from "discord.js";
+import {
+  Client,
+  GatewayIntentBits,
+  Collection,
+  REST,
+  Routes,
+  SlashCommandBuilder
+} from "discord.js";
 import fs from "fs";
 import path from "path";
 import { pathToFileURL } from "url";
 import dotenv from "dotenv";
-import { printStartBanner } from "./utils/banner.js";
+import { printReady } from "./utils/banner.js"; // ✅ neue Funktion aus banner.js
 
 dotenv.config();
 
@@ -28,8 +35,8 @@ export class NovaClient extends Client {
 
     this.once("ready", async () => {
       try {
-        const version = "0.0.1";
-        printStartBanner(this, { version, commandCount: this.commands.size });
+        const version = "0.0.2";
+        printReady(this, { version, commandCount: this.commands.size, style: "table" });
       } catch (e) {
         console.error("[NovaCord] Fehler bei der Startmeldung:", e);
       }
