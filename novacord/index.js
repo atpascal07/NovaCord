@@ -1,3 +1,2 @@
 export { NovaClient } from "./client.js";
-export * as utils from "./utils/banner.js";
-
+export { printReady } from "./utils/banner.js";
