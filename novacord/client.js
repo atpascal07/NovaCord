@@ -28,7 +28,7 @@ export class NovaClient extends Client {
 
     this.once("ready", async () => {
       try {
-        const version = "0.1.16";
+        const version = "0.1.18";
         printStartBanner(this, { version, commandCount: this.commands.size });
       } catch (e) {
         console.error("[NovaCord] Fehler bei der Startmeldung:", e);
