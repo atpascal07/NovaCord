@@ -1,34 +1,11 @@
 {
   "name": "novacord",
-  "version": "0.1.13",
-  "description": "Ein einfach zu nutzendes Framework für discord.js.",
+  "version": "0.1.14",
+  "description": "Ein einfach zu nutzendes Framework für discord.js",
+  "main": "index.js",
   "type": "module",
-  "main": "./novacord/index.js",
-  "exports": {
-    ".": "./novacord/index.js"
-  },
-  "keywords": [
-    "discord",
-    "discord.js",
-    "framework",
-    "bot",
-    "slash-commands",
-    "esm"
-  ],
-  "author": "atpascal07",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/atpascal07/NovaCord.git"
-  },
-  "bugs": {
-    "url": "https://github.com/atpascal07/NovaCord/issues"
-  },
-  "homepage": "https://discord.gg/YWZwk3fn",
   "dependencies": {
-    "discord.js": "^14.16.3",
-    "dotenv": "^16.4.5",
-    "chalk": "^5.3.0",
-    "cli-table3": "^0.6.3"
+    "discord.js": "^14.15.3",
+    "dotenv": "^16.4.5"
   }
 }
