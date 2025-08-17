@@ -6,14 +6,14 @@ body:
 - type: markdown
   attributes:
     value: |
-      - Check if the bug was already reported [here](https://github.com/tibue99/ezcord/issues).
+      - Check if the bug was already reported [here](https://github.com/atpascal07/NovaCord/issues).
       - Include only one bug per issue.
       - Make sure that only one Discord package is installed.
 
 - type: input
   attributes:
-    label: EzCord Version
-    description: Which version of EzCord are you using?
+    label: NovaCord Version
+    description: Which version of NovaCord are you using?
     placeholder: X.Y.Z
   validations:
     required: true
@@ -21,8 +21,8 @@ body:
 - type: input
   attributes:
     label: Version
-    description: Which version of Discord.py or Pycord are you using?
-    placeholder: Pycord X.Y.Z
+    description: Which version of Discord.js are you using?
+    placeholder: Discord.js X.Y.Z
   validations:
     required: true
 
@@ -46,7 +46,7 @@ body:
     description: >
       A short snippet of code that showcases the bug.
       Please remove your bot token and everything that is not related to the bug.
-    render: Python
+    render: Js
 
 - type: textarea
   attributes:
