@@ -1,16 +1,9 @@
-import {
-  Client,
-  GatewayIntentBits,
-  Collection,
-  REST,
-  Routes,
-  SlashCommandBuilder
-} from "discord.js";
+import { Client, GatewayIntentBits, Collection, REST, Routes, SlashCommandBuilder } from "discord.js";
 import fs from "fs";
 import path from "path";
 import { pathToFileURL } from "url";
 import dotenv from "dotenv";
-import { printReady } from "./utils/banner.js"; // ✅ neue Funktion aus banner.js
+import { printReady } from "./utils/banner.js"; // ✅ Richtig: utils/banner.js
 
 dotenv.config();
 
@@ -25,23 +18,26 @@ function isCommandModule(mod) {
 
 export class NovaClient extends Client {
   constructor(options = {}) {
-    const { intents, ...rest } = options;
+    const { intents, startMessageStyle = "table", ...rest } = options;
     super({
       intents: intents ?? [GatewayIntentBits.Guilds],
       ...rest
     });
 
     this.commands = new Collection();
+    this.startMessageStyle = startMessageStyle;
 
+    // 📌 Ready-Event
     this.once("ready", async () => {
       try {
-        const version = "0.0.4";
-        printReady(this, { version, commandCount: this.commands.size, style: "table" });
+        const version = "0.0.1";
+        printReady(this, { version, commandCount: this.commands.size, style: this.startMessageStyle });
       } catch (e) {
         console.error("[NovaCord] Fehler bei der Startmeldung:", e);
       }
     });
 
+    // 📌 Command-Handler
     this.on("interactionCreate", async (interaction) => {
       if (!interaction.isChatInputCommand()) return;
       const cmd = this.commands.get(interaction.commandName);
@@ -61,6 +57,7 @@ export class NovaClient extends Client {
     });
   }
 
+  // 📌 Bot starten
   async start(token = process.env.TOKEN) {
     if (!token || typeof token !== "string") {
       throw new Error("Kein Bot-Token gefunden! Lege TOKEN in .env an oder übergib es an start(token)");
@@ -68,6 +65,7 @@ export class NovaClient extends Client {
     return this.login(token);
   }
 
+  // 📌 Commands laden
   async loadCommands(dir = "./commands") {
     const base = path.isAbsolute(dir) ? dir : path.join(process.cwd(), dir);
     if (!fs.existsSync(base)) return this.commands;
@@ -89,6 +87,7 @@ export class NovaClient extends Client {
     return this.commands;
   }
 
+  // 📌 Commands deployen
   async deployCommands({ clientId = process.env.CLIENT_ID, guildId = process.env.GUILD_ID } = {}) {
     if (!clientId) throw new Error("CLIENT_ID wird benötigt, um Commands zu deployen.");
     const list = toArray(this.commands?.values?.() ?? []);
@@ -111,6 +110,7 @@ export class NovaClient extends Client {
     }
   }
 
+  // 📌 Help-Command
   addHelpCommand(name = "help", { embed = true } = {}) {
     const helpCommand = {
       data: new SlashCommandBuilder()
